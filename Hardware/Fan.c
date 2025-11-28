@@ -22,7 +22,7 @@ void Fan_Init(void)
 
 void Fan_HandleKey(uint8_t keyNum)
 {
-    if (keyNum == 1)
+    if (keyNum == 3)
     {
         // K1: Toggle auto swing on/off
         g_SwingOn = !g_SwingOn;
@@ -47,7 +47,7 @@ void Fan_Update(void)
         }
 
         Servo_SetAngle(g_Angle);
-        Delay_ms(90);   // swing speed
+        Delay_ms(80);   // swing speed
     }
     else
     {

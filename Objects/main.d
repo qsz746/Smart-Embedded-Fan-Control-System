@@ -33,3 +33,4 @@
 .\objects\main.o: .\Hardware\OLED.h
 .\objects\main.o: .\Hardware\Servo.h
 .\objects\main.o: .\Hardware\Fan.h
+.\objects\main.o: .\Hardware\Motor.h

@@ -4,7 +4,7 @@
 #include "OLED.h"
 #include "Servo.h"
 #include "Fan.h"
-
+ #include "Motor.h"
 
 uint8_t KeyNum;
 float Angle;
@@ -12,11 +12,12 @@ int main(void)
 {
 	OLED_Init();
 	Servo_Init();
+	Motor_Init();
 	Key_Init();
 	
-	OLED_ShowString(1, 1, "Angle:");
  
-	
+    OLED_ShowString(1, 1, "Speed:");
+	 
 	while(1)
 	{   
 		
@@ -27,6 +28,5 @@ int main(void)
 		}
 
 		Fan_Update();
-		//OLED_ShowNum(1, 7, Angle, 3);
 	}
 }
