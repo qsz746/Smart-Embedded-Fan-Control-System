@@ -3,6 +3,8 @@
 #include "Key.h"
 #include "OLED.h"
 #include "Servo.h"
+#include "Fan.h"
+
 
 uint8_t KeyNum;
 float Angle;
@@ -19,15 +21,12 @@ int main(void)
 	{   
 		
 		KeyNum = Key_GetNum();
-		if(KeyNum == 1)
-		{	
-			Angle += 30;
-			if(Angle > 180)
-			{
-				Angle = 0;
-			}
-		}	
-		Servo_SetAngle(Angle);
-		OLED_ShowNum(1, 7, Angle, 3);
+		if (KeyNum != 0)
+		{
+			Fan_HandleKey(KeyNum);
+		}
+
+		Fan_Update();
+		//OLED_ShowNum(1, 7, Angle, 3);
 	}
 }

@@ -32,3 +32,4 @@
 .\objects\main.o: .\Hardware\Key.h
 .\objects\main.o: .\Hardware\OLED.h
 .\objects\main.o: .\Hardware\Servo.h
+.\objects\main.o: .\Hardware\Fan.h
