@@ -62,18 +62,18 @@ void PWM_Set_Servo_Compare2(uint16_t Compare)
 void PWM_Init_Motor(void)
 {
     //Enable RCC
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 	
 	//Init GPIO
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_2;
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_7;
 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStruct);
 	
 	
-	//Choose internal clock using TIM2
+	//Choose internal clock using TIM3
 	//default is internal, this line can be omitted
 	TIM_InternalClockConfig(TIM3);
 	
@@ -97,15 +97,15 @@ void PWM_Init_Motor(void)
 	TIM_OCInitStruct.TIM_OCPolarity = TIM_OCPolarity_High;
 	TIM_OCInitStruct.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStruct.TIM_Pulse = 90;         //CCR
-	TIM_OC3Init(TIM3, &TIM_OCInitStruct);
+	TIM_OC2Init(TIM3, &TIM_OCInitStruct);
 	
 	
-	TIM_Cmd(TIM2, ENABLE);
+	TIM_Cmd(TIM3, ENABLE);
 }
 
-void PWM_Set_Motor_Compare3(uint16_t Compare)
+void PWM_Set_Motor_Compare2(uint16_t Compare)
 {
-	TIM_SetCompare3(TIM3, Compare);
+	TIM_SetCompare2(TIM3, Compare);
 }
 
 

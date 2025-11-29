@@ -16,16 +16,16 @@ void Motor_Init(void)
 
 void Motor_SetSpeed(int8_t Speed)
 {
-	if(Speed >= 0)
+	if(Speed <= 0)
 	{
 		GPIO_ResetBits(GPIOA, GPIO_Pin_4);
 		GPIO_SetBits(GPIOA, GPIO_Pin_5);
-		PWM_Set_Motor_Compare3(Speed);	
+		PWM_Set_Motor_Compare2(Speed);	
 	}
 	else
 	{
 		GPIO_SetBits(GPIOA, GPIO_Pin_4);
 		GPIO_ResetBits(GPIOA, GPIO_Pin_5);
-		PWM_Set_Motor_Compare3(-Speed);	
+		PWM_Set_Motor_Compare2(-Speed);	
 	}
 }

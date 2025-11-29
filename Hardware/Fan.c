@@ -1,6 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 
 #include "Servo.h"
+#include "Motor.h"
 #include "delay.h"
 
 #define SERVO_MIN_ANGLE   30.0f    // Minimum swing angle (degrees) 
@@ -12,21 +13,45 @@ static uint8_t g_SwingOn   = 0;      // Auto swing on/off flag
 static float   g_Angle     = 90.0f;  // Current servo angle 
 static int8_t  g_Direction = 1;      // 1: increasing angle, -1: decreasing angle
 
+static int8_t  g_Speed     = 0;      // motor speed 0..100
+
 void Fan_Init(void)
 {
+	Servo_Init();
+	Motor_Init();
+	
     g_SwingOn   = 0;
     g_Angle     = 90.0f;  // Center position
     g_Direction = 1;
-    Servo_SetAngle(g_Angle);          
+	
+	g_Speed     = 0;
+	
+    Servo_SetAngle(g_Angle);       
+	Motor_SetSpeed(g_Speed);  	
 }
 
 void Fan_HandleKey(uint8_t keyNum)
-{
-    if (keyNum == 3)
-    {
-        // K1: Toggle auto swing on/off
-        g_SwingOn = !g_SwingOn;
-    }   
+{	
+	switch(keyNum)
+	{
+		case 1: 
+			g_Speed += 20;
+			if (g_Speed > 100) g_Speed = 100;
+			Motor_SetSpeed(g_Speed);
+			break;
+		
+		case 2: 
+			g_Speed -= 20;
+			if (g_Speed < 0) g_Speed = 0;
+			Motor_SetSpeed(g_Speed);
+			break;
+		
+		case 3:
+			g_SwingOn = !g_SwingOn;
+		
+		default:
+			break;
+	}
 }
 
 void Fan_Update(void)
@@ -54,4 +79,9 @@ void Fan_Update(void)
          // idle a bit when swing is off
         Delay_ms(10);
     }
+}
+
+int8_t Fan_GetSpeed(void)
+{
+    return g_Speed;
 }

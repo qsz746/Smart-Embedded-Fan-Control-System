@@ -29,4 +29,5 @@
 .\objects\fan.o: .\Library\stm32f10x_wwdg.h
 .\objects\fan.o: .\Library\misc.h
 .\objects\fan.o: Hardware\Servo.h
+.\objects\fan.o: Hardware\Motor.h
 .\objects\fan.o: .\System\delay.h

@@ -4,15 +4,14 @@
 #include "OLED.h"
 #include "Servo.h"
 #include "Fan.h"
- #include "Motor.h"
+#include "Motor.h"
 
 uint8_t KeyNum;
 float Angle;
 int main(void)
 {
 	OLED_Init();
-	Servo_Init();
-	Motor_Init();
+	Fan_Init();
 	Key_Init();
 	
  
@@ -28,5 +27,7 @@ int main(void)
 		}
 
 		Fan_Update();
+		OLED_ShowSignedNum(2, 5, Fan_GetSpeed(), 3);
 	}
+ 
 }
